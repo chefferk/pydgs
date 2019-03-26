@@ -1,1 +1,10 @@
-{'mean grain size': 0.0, 'grain size sorting': 0.0, 'grain size skewness': nan, 'grain size kurtosis': nan, 'percentiles': [0.05, 0.1, 0.16, 0.25, 0.5, 0.75, 0.84, 0.9, 0.95], 'percentile_values': array([0., 0., 0., 0., 0., 0., 0., 0., 0.]), 'grain size frequencies': array([], dtype=float64), 'grain size bins': array([], dtype=float64)}
+Mean grain size: nan
+Grain size sorting: nan
+Grain size skewness: nan
+Grain size kurtosis: nan
+Percentiles: [0.05, 0.1, 0.16, 0.25, 0.5, 0.75, 0.84, 0.9, 0.95]
+Percentile_values: [nan nan nan nan nan nan nan nan nan]
+Grain size frequencies: [nan nan nan nan nan nan nan]
+Grain size bins: [ 12.56637061  25.13274123  50.26548246 100.53096491 201.06192983
+ 402.12385966 804.24771932]
+

@@ -2,6 +2,7 @@ import DGS
 from tkinter import *
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import ttk
 import matplotlib
 
 matplotlib.use("TkAgg")
@@ -33,28 +34,33 @@ window.config(menu=menu)
 
 
 def pick_image():
-    file = filedialog.askopenfilename()
-    messagebox.showinfo("Image", file)
-    return file
+    filee = filedialog.askopenfilename()
+    messagebox.showinfo("Image", filee)
+    global file_name
+    file_name = filee
+    print(file_name)
+    return filee
 
 
 # TODO: create funciton that checks data tyes are correct
 #       set default values
 def clicked():
+    # try:
     density = int(dens.get())
     resolution = int(res.get())
-    dofilter = 1
+    dofilter = 0  # this causes an issue in pyDGS when set to 1
     notes = int(no.get())
     maxscale = int(maxs.get())
     verbose = 0
     x = 0
-    image_file = "IMG_0229.JPG"
+
+    try:
+        image_file = file_name
+    except Exception as e:
+        image_file = btnn.invoke()
     dgs_stats = DGS.dgs(
         image_file, density, resolution, dofilter, maxscale, notes, verbose, x
     )
-    print(dgs_stats.keys())
-
-    # return dgs_stats
 
     text = (
         f"Mean grain size: {dgs_stats['mean grain size']}\n"
@@ -67,6 +73,9 @@ def clicked():
         f"Grain size bins: {dgs_stats['grain size bins']}\n"
     )
     return text
+    # except TclError as e:
+    #     print(e)
+    #     return 'failed'
 
 
 # def disp(stats):
@@ -105,47 +114,47 @@ def test():
 
 
 # ---------- new window ---------- #
-b = Button(window, text="Create new window", command=create_window)
-b.grid(column=1, row=0)
+# b = Button(window, text="Create new window", command=create_window)
+# b.grid(column=1, row=0)
 
 # ---------- select image ---------- #
-btn = Button(window, text="Select image", command=pick_image)
-btn.grid(column=0, row=0)
+btnn = ttk.Button(window, text="Select image", command=pick_image)
+btnn.grid(column=0, row=0)
 
 # ---------- density ---------- #
-lbl = Label(window, text="Density", justify="left")
+lbl = ttk.Label(window, text="Density", justify="left")
 lbl.grid(column=0, row=1)
-dens = Spinbox(window, from_=1, to=100, width=5)
+dens = ttk.Spinbox(window, from_=1, to=100, width=5)
 dens.grid(column=1, row=1)
 
 # ---------- resolution ---------- #
-lbl = Label(window, text="Resolution")
+lbl = ttk.Label(window, text="Resolution")
 lbl.grid(column=0, row=2)
-res = Spinbox(window, from_=0, to=100, width=5)
+res = ttk.Spinbox(window, from_=0, to=100, width=5)
 res.grid(column=1, row=2)
 
 # ---------- dofilter ---------- #
-lbl = Label(window, text="Dofilter")
+lbl = ttk.Label(window, text="Dofilter")
 lbl.grid(column=0, row=3)
-rad1 = Radiobutton(window, text="Yes", value=1)
-rad2 = Radiobutton(window, text="No", value=0)
+rad1 = ttk.Radiobutton(window, text="Yes", value=1)
+rad2 = ttk.Radiobutton(window, text="No", value=0)
 rad1.grid(column=1, row=3)
 rad2.grid(column=2, row=3)
 
 # ---------- notes---------- #
-lbl = Label(window, text="Notes")
+lbl = ttk.Label(window, text="Notes")
 lbl.grid(column=0, row=4)
-no = Spinbox(window, from_=0, to=8, width=5)
+no = ttk.Spinbox(window, from_=0, to=8, width=5)
 no.grid(column=1, row=4)
 
 # ---------- maxscale ---------- #
-lbl = Label(window, text="Maxscale")
+lbl = ttk.Label(window, text="Maxscale")
 lbl.grid(column=0, row=5)
-maxs = Spinbox(window, from_=2, to=40, width=5)
+maxs = ttk.Spinbox(window, from_=2, to=40, width=5)
 maxs.grid(column=1, row=5)
 
 # ---------- process ---------- #
-btn = Button(window, text="Process", command=clicked)
+btn = ttk.Button(window, text="Process", command=create_window)
 btn.grid(column=0, row=6)
 
 
