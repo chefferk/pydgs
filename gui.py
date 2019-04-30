@@ -10,6 +10,7 @@ import time
 import threading
 import matplotlib
 import numpy as np
+import pandas as pd
 
 matplotlib.use("TkAgg")
 import matplotlib.pyplot as plt
@@ -102,6 +103,7 @@ class Root(tk.Tk):
         with open("output.txt", "w") as f:
             x = self.output_text
             print(x, file=f)
+        self.output_text.to_csv('output.csv')
         print("Stats saved at output.txt")
 
     # TODO: figure out the threading and have some sort of progress bar
@@ -184,6 +186,19 @@ class Root(tk.Tk):
             image_file, density, resolution, dofilter, maxscale, notes, verbose, x
         )
 
+        myDict = {
+            'Mean grain size': [dgs_stats['mean grain size']],
+            'Grain size sorting': [dgs_stats['grain size sorting']],
+            'Grain size skewness': [dgs_stats['grain size skewness']],
+            'Grain size kurtosis': [dgs_stats['grain size kurtosis']],
+            'Percentiles': [dgs_stats['percentiles']],
+            'Percentile_values': [dgs_stats['percentile_values']],
+            'Grain size frequencies': [dgs_stats['grain size frequencies']],
+            'Grain size bins': [dgs_stats['grain size bins']],
+        }
+
+        df = pd.DataFrame.from_dict(myDict, orient='index')
+
         text = (
             f"Mean grain size: {dgs_stats['mean grain size']}\n"
             f"Grain size sorting: {dgs_stats['grain size sorting']}\n"
@@ -196,8 +211,8 @@ class Root(tk.Tk):
         )
         print('finished processing')
 
-        self.output_text = text
-        return text, dgs_stats
+        self.output_text = df
+        return df, dgs_stats
 
 if __name__ == "__main__":
     root = Root()

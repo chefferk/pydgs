@@ -15,6 +15,7 @@ pydgs = "*"
 matplotlib = "*"
 pyside2 = "*"
 pyqt5 = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.7"
