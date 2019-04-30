@@ -21,7 +21,7 @@ class Root(tk.Tk):
         self.title("pyDGS")
         self.geometry("330x400")
         self.resizable(False, False)
-        self.iconbitmap("py.ico")
+        # self.iconbitmap("py.ico")
 
         self.file_name = None
 
@@ -129,7 +129,7 @@ class Root(tk.Tk):
         fileMenu.add_command(label="Export", command=self.save_stats)
         menubar.add_cascade(label="File", menu=fileMenu)
 
-        self.iconbitmap("py.ico")
+        # self.iconbitmap("py.ico")
         self.display = Label(self.wind, text=output_text)
         self.display.pack()
 
